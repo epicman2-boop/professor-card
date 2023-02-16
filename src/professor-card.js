@@ -2,7 +2,7 @@ import { LitElement, html, css } from 'lit';
 
 
   
-const pict = new URL('https://cdn.discordapp.com/attachments/963095262363017246/1011693508475752488/8D8327F2-7142-40F4-84A9-B05FDD187E60.jpg', import.meta.url).href;
+const pict = new URL('https://ist.psu.edu/sites/default/files/directory/Giacobe-Nicklaus.jpg', import.meta.url).href;
 
 export class ProfessorCard extends LitElement {
   static get properties() {
