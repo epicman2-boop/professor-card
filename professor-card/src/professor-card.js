@@ -1,87 +1,125 @@
 import { LitElement, html, css } from 'lit';
 
-const logo = new URL('../assets/open-wc-logo.svg', import.meta.url).href;
 
-class ProfessorCard extends LitElement {
-  static properties = {
-    header: { type: String },
+  
+const pict = new URL('https://media.discordapp.net/attachments/963095262363017246/1020131830323744788/unknown.png?width=468&height=468', import.meta.url).href;
+
+export class ProfessorCard extends LitElement {
+  static get properties() {
+    return {
+      name: {
+        type: String,
+        reflect: true
+      },
+      position: {
+        type: String,
+      }
+    }
   }
 
-  static styles = css`
-    :host {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      font-size: calc(10px + 2vmin);
-      color: #1a2b42;
-      max-width: 960px;
-      margin: 0 auto;
-      text-align: center;
-      background-color: var(--professor-card-background-color);
-    }
-
-    main {
-      flex-grow: 1;
-    }
-
-    .logo {
-      margin-top: 36px;
-      animation: app-logo-spin infinite 20s linear;
-    }
-
-    @keyframes app-logo-spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .app-footer {
-      font-size: calc(12px + 0.5vmin);
-      align-items: center;
-    }
-
-    .app-footer a {
-      margin-left: 5px;
-    }
-  `;
+  static get styles() {
+    return css`
+      .wrapper {
+  width: 400px;
+  border: 2px solid black;
+  display: inline-flex;
+}
+.image {
+  width: 400px;
+}
+.header {
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem;
+}
+.header h3:hover {
+  font-style: italic;
+  font-size: 1.1em;
+}
+.header h3,
+.header h4 {
+  transition: .3s ease-in-out all;
+  margin: 16px;
+  font-style: normal;
+}
+.buttons button:focus,
+.buttons button:hover {
+  background-color: rgba(200,0,50,.5);
+}
+.buttons button:active {
+  background-color: rgba(50,0,200,.5);
+}
+.buttons {
+  display: block;
+}
+button {
+  padding: 12px;
+  font-size: 32px;
+}
+details {
+  margin-left: 24px;
+  padding: 10px;
+}
+.details summary {
+  font-size: 20px;
+  font-weight: bold;
+}
+@media only screen and (max-width: 1200px){
+  .wrapper {
+    background-color: green;
+  }
+}
+@media only screen and (max-width: 600px){
+  .wrapper {
+    background-color: yellow;
+  }
+}
+@media only screen and (max-width: 425px){
+  .wrapper {
+    font-weight: normal;
+  }
+  .wrapper .header h3 {
+    font-size: 12px;
+  }
+  .wrapper .header h4 {
+    font-size: 10px !important;
+  }
+  details {
+    display: none;
+  }
+}
+    `;
+  }
 
   constructor() {
     super();
-    this.header = 'My app';
+    this.name = "Professor Giacobe";
+    this.position = "Chad of IST";
   }
 
   render() {
     return html`
-      <main>
-        <div class="logo"><img alt="open-wc logo" src=${logo} /></div>
-        <h1>${this.header}</h1>
-
-        <p>Edit <code>src/ProfessorCard.js</code> and save to reload.</p>
-        <a
-          class="app-link"
-          href="https://open-wc.org/guides/developing-components/code-examples/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Code examples
-        </a>
-      </main>
-
-      <p class="app-footer">
-        🚽 Made with love by
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://github.com/open-wc"
-          >open-wc</a
-        >.
-      </p>
-    `;
+  
+    <div class="wrapper">
+      <div class="container">
+        <img class="image" src="${pict}"/>
+        <div class="header">
+          <h3>${this.name}</h3>
+          <h4>${this.position}</h4>
+        </div>
+        <details class="details">
+          <summary>Professor Info</summary>
+          <div>
+            <ul>
+              <li>Age: Unknowable</li>
+              <li>Positions: God</li>
+              <li>Years of Service: Infinite</li>
+              <li>COMPLETELY OVERPAID TOOTHLESS WONDER</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </div>`;
   }
 }
 

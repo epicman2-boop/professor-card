@@ -20,9 +20,57 @@
 </head>
 
 <body>
+  <div class="buttons">
+    <button class="duplicate">Duplicate last card</button>
+    <button class="modifytitle">Change Name</button>
+    <button id="deletelastcard">Delete</button>
+    <button data-toggle-btn>Toggle Info</button>
+  </div>
+  <div id="app">
   <professor-card></professor-card>
+  </div>
 
   <script type="module" src="./src/professor-card.js"></script>
+  <script>
+    // toggle the 1ST instance of the stats
+document.querySelector('button[data-toggle-btn]').addEventListener('click', (e) => {
+  const details = document.querySelector('professor-card').shadowRoot.querySelector('details')
+  console.log(details);
+  if (details.getAttribute('open')) {
+    details.removeAttribute('open');
+  }
+  else {
+    details.setAttribute('open','open');    
+  }
+});
+// duplicate the 1st item
+document.querySelector('.duplicate').addEventListener('click', function(e) {
+  const itemToClone = document.querySelector('professor-card').cloneNode();
+  document.querySelector('#app').appendChild(itemToClone);
+});
+
+// modify name of 1st item
+document.querySelector('.modifytitle').addEventListener('click', function(e) {
+  let name = prompt("Name Professor....");
+  if (name) {
+    document.querySelector('professor-card').name = name;
+  }
+});
+
+// delete the last item
+document.querySelector('#deletelastcard').addEventListener('click', function(e) {
+  let wantsTo = confirm("Are you sure?");
+  if (wantsTo) {
+    if (document.querySelector('#app :last-child') !== document.querySelector('professor-card')) {
+      document.querySelector('#app :last-child').remove();      
+    }
+    else {
+      alert("YOU CAN NOT DELETE GOD HIMSELF!!!!");
+    }
+  }
+});
+  </script>
+  </script>
 </body>
 
 </html>
