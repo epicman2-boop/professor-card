@@ -110,12 +110,12 @@ details {
         <details class="details">
           <summary>Professor Info</summary>
           <div>
-            <ul>
-              <li>Age: Unknowable</li>
-              <li>Positions: God</li>
-              <li>Years of Service: Infinite</li>
-              <li>COMPLETELY OVERPAID TOOTHLESS WONDER</li>
-            </ul>
+          <ul>
+               <li>Age: Unknowable</li>
+               <li>Positions: God</li>
+               <li>Years of Service: Infinite</li>
+               <li>COMPLETELY COMPLETE</li>
+          </ul>
           </div>
         </details>
       </div>
