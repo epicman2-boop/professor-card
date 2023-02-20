@@ -108,10 +108,10 @@ details {
     <div class="wrapper">
       <div class="container">
         <div class="image"> 
-          <meme-maker> 
+          <meme-maker 
             image-url="${pict}"
             top-text="${this.top}"
-            bottom-text="${this.bottom}"
+            bottom-text="${this.bottom}">
           </meme-maker>
         </div>
         <div class="header">
