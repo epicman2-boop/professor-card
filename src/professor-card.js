@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import "@lrnwebcomponents/meme-maker/meme-maker.js";
 
 
   
@@ -13,7 +14,9 @@ export class ProfessorCard extends LitElement {
       },
       position: {
         type: String,
-      }
+      },
+      top: {type: String},
+      bottom: {type: String}
     }
   }
 
@@ -95,6 +98,8 @@ details {
     super();
     this.name = "Professor Giacobe";
     this.position = "Chad of IST";
+    this.top = "GOD KING"
+    this.bottom = "OF IST"
   }
 
   render() {
@@ -102,7 +107,11 @@ details {
   
     <div class="wrapper">
       <div class="container">
-        <img class="image" src="${pict}"/>
+       <meme-maker> 
+        image-url= "${pict}"
+        top-text= "${this.top}"
+        bottom-text= "${this.bottom}"
+      </meme-maker>
         <div class="header">
           <h3>${this.name}</h3>
           <h4>${this.position}</h4>
