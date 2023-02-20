@@ -107,11 +107,13 @@ details {
   
     <div class="wrapper">
       <div class="container">
-       <meme-maker> 
-        image-url= "${pict}"
-        top-text= "${this.top}"
-        bottom-text= "${this.bottom}"
-      </meme-maker>
+        <div class="image"> 
+          <meme-maker> 
+            image-url="${pict}"
+            top-text="${this.top}"
+            bottom-text="${this.bottom}"
+          </meme-maker>
+        </div>
         <div class="header">
           <h3>${this.name}</h3>
           <h4>${this.position}</h4>
