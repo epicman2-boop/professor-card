@@ -109,9 +109,8 @@ details {
       <div class="container">
         <div class="image"> 
           <meme-maker 
-            image-url="${pict}"
-            top-text="${this.top}"
-            bottom-text="${this.bottom}">
+          image-url="${pict}"
+          top-text="${this.top}">
           </meme-maker>
         </div>
         <div class="header">
