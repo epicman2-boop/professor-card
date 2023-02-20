@@ -3,7 +3,7 @@ import "@lrnwebcomponents/meme-maker/meme-maker.js";
 
 
   
-const pict = 'https://ist.psu.edu/sites/default/files/directory/Giacobe-Nicklaus.jpg';
+const pict = new URL('../assets/GiacobeTime.jpg', import.meta.url).href;
 
 export class ProfessorCard extends LitElement {
   static get properties() {
