@@ -110,7 +110,8 @@ details {
         <div class="image"> 
           <meme-maker 
           image-url="${pict}"
-          top-text="${this.top}">
+          top-text="${this.top}"
+          bottom-text="${this.bottom}">
           </meme-maker>
         </div>
         <div class="header">
