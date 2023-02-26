@@ -14,7 +14,22 @@
       padding: 0;
       font-family: sans-serif;
       background-color: #ededed;
+      --professor-card-accent-color: pink;
+      --professor-card-details-padding: 20px;
+      --professor-card-wrapper-text-align: left;
     }
+
+    professor-card[accent-color="purple"] {
+      --professor-card-accent-color: purple;
+    }
+
+    professor-card::part(meme) {
+      margin: 10px;
+      background-color: blue;
+      padding: 20px;
+    }
+
+
   </style>
   <title>professor-card</title>
 </head>
@@ -24,24 +39,55 @@
     <button class="duplicate">Duplicate last card</button>
     <button class="modifytitle">Change Name</button>
     <button id="deletelastcard">Delete</button>
-    <button data-toggle-btn>Toggle Info</button>
+    <button class="toggle">Toggle Info</button>
   </div>
   <div id="app">
-  <professor-card></professor-card>
+  <professor-card>
+    <ul>
+      <li>Age: Unknowable</li>
+      <li>Positions: God</li>
+      <li>Years of Service: Infinite</li>
+      <li>COMPLETELY COMPLETE</li>
+    </ul>
+  </professor-card>
   </div>
 
   <script type="module" src="./src/professor-card.js"></script>
   <script>
-    // toggle the 1ST instance of the stats
-document.querySelector('button[data-toggle-btn]').addEventListener('click', (e) => {
-  const details = document.querySelector('professor-card').shadowRoot.querySelector('details')
-  console.log(details);
-  if (details.getAttribute('open')) {
-    details.removeAttribute('open');
+  
+  //toggle Custom Event
+document.body.addEventListener('opened-changed', (e)=>{
+  console.log(e.detail.value);
+  document.querySelector('.toggle').innerText = e.detail.value ? "Hide" : "Show";
+});
+
+//Change Font to funny one
+document.querySelector('professor-card').addEventListener('mouseover', function (e){
+  if (document.querySelector('professor-card').changeFont){
+    document.querySelectorAll('professor-card').forEach((item)=>{
+      item.changeFont = false;
+    });
   }
-  else {
-    details.setAttribute('open','open');    
+  else{
+    document.querySelectorAll('professor-card').forEach((item)=>{
+      item.changeFont = true;
+    });
   }
+});
+  
+  // toggle the 1ST instance of the stats
+document.querySelector('.toggle').addEventListener('click', (e) => {
+  // const details = document.querySelector('professor-card').shadowRoot.querySelector('details')
+  // console.log(details);
+  // if (details.getAttribute('open')) {
+  //   details.removeAttribute('open');
+  // }
+  // else {
+  //   details.setAttribute('open','open');    
+  // }
+  document.querySelectorAll('professor-card').forEach((item)=>{
+    item.opening = !item.opening;
+  })
 });
 // duplicate the 1st item
 document.querySelector('.duplicate').addEventListener('click', function(e) {
@@ -56,6 +102,9 @@ document.querySelector('.modifytitle').addEventListener('click', function(e) {
     document.querySelector('professor-card').name = name;
   }
 });
+
+
+
 
 // delete the last item
 document.querySelector('#deletelastcard').addEventListener('click', function(e) {

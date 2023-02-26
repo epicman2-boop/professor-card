@@ -6,8 +6,7 @@ import "@lrnwebcomponents/meme-maker/meme-maker.js";
 const pict = new URL('../assets/GiacobeTime.jpg', import.meta.url).href;
 
 export class ProfessorCard extends LitElement {
-  static get properties() {
-    return {
+  static properties = {
       name: {
         type: String,
         reflect: true
@@ -16,12 +15,43 @@ export class ProfessorCard extends LitElement {
         type: String,
       },
       top: {type: String},
-      bottom: {type: String}
-    }
+      bottom: {type: String},
+      accentColor: {
+        type: String,
+        reflect: true,
+        attribute: "accent-color"
+      },
+      opening: {
+        type: Boolean,
+        reflect: true
+    },
+      changeFont: {
+        type: Boolean,
+        reflect: true
+      }
   }
 
   static get styles() {
     return css`
+    
+    :host{
+      display: inline-block;
+    }
+    :host([changeFont]){
+      font-family: var(--professor-card-changeFont-font-family, Courier, monospace);
+    }
+    :host([accent-color="purple"]) .wrapper{
+        background-color: var(--professor-card-accent-color, purple); 
+        color: white;
+    }
+
+    :host([accent-color="orange"]) .wrapper{
+      background-color: var(--professor-card-accent-color, orange);        color: white;
+    }
+
+    :host([accent-color="blue"]) .wrapper{
+      background-color: var(--professor-card-accent-color, blue);        color: red;
+    }
       .wrapper {
   width: 400px;
   border: 2px solid black;
@@ -31,7 +61,7 @@ export class ProfessorCard extends LitElement {
   width: 400px;
 }
 .header {
-  text-align: center;
+  text-align: var(--professor-card-header-text-align, center);
   font-weight: bold;
   font-size: 2rem;
 }
@@ -61,7 +91,7 @@ button {
 }
 details {
   margin-left: 24px;
-  padding: 10px;
+  padding: var(--professor-card-details-padding, 50px);
 }
 .details summary {
   font-size: 20px;
@@ -96,19 +126,43 @@ details {
 
   constructor() {
     super();
+    this.accentColor = null;
     this.name = "Professor Giacobe";
     this.position = "Chad of IST";
     this.top = "GOD KING"
     this.bottom = "OF IST"
+    this.opening=false;
+  }
+
+  ToggleEvent() {
+     const state = this.shadowRoot.querySelector('details').getAttribute('open') === "" ? true : false;
+     this.opening = state;
+  }
+
+  updated(changedProperties) {
+    changedProperties.forEach((oldValue, propName)=> {
+      if (propName === "opening"){
+        this.dispatchEvent(new CustomEvent('opened-changed', {
+          composed: true,
+          bubbles: true,
+          cancelable: false,
+          detail:{
+            value: this[propName]
+          }
+        }));
+        console.log(`${propName} changed. oldValue: ${oldValue}`);
+      }
+    });
   }
 
   render() {
     return html`
   
-    <div class="wrapper">
+    <div class="wrapper" part="wrapper">
       <div class="container">
         <div class="image"> 
           <meme-maker 
+          part="meme"
           image-url="${pict}"
           top-text="${this.top}"
           bottom-text="${this.bottom}">
@@ -118,15 +172,10 @@ details {
           <h3>${this.name}</h3>
           <h4>${this.position}</h4>
         </div>
-        <details class="details">
+        <details class="details" .open="${this.opening}" @toggle="${this.ToggleEvent}">
           <summary>Professor Info</summary>
           <div>
-          <ul>
-               <li>Age: Unknowable</li>
-               <li>Positions: God</li>
-               <li>Years of Service: Infinite</li>
-               <li>COMPLETELY COMPLETE</li>
-          </ul>
+           <slot></slot>
           </div>
         </details>
       </div>
