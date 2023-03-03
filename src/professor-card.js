@@ -28,7 +28,9 @@ export class ProfessorCard extends LitElement {
       changeFont: {
         type: Boolean,
         reflect: true
-      }
+      },
+      detailLabel: {type: String},
+      picture: {type: String}
   }
 
   static get styles() {
@@ -132,6 +134,8 @@ details {
     this.top = "GOD KING"
     this.bottom = "OF IST"
     this.opening=false;
+    this.detailLabel= "Professor Info";
+    this.picture="https://cdn.discordapp.com/attachments/703281782111338586/1076698279712137346/unknown.png"
   }
 
   ToggleEvent() {
@@ -163,7 +167,7 @@ details {
         <div class="image"> 
           <meme-maker 
           part="meme"
-          image-url="${pict}"
+          image-url="${this.picture}"
           top-text="${this.top}"
           bottom-text="${this.bottom}">
           </meme-maker>
@@ -173,7 +177,7 @@ details {
           <h4>${this.position}</h4>
         </div>
         <details class="details" .open="${this.opening}" @toggle="${this.ToggleEvent}">
-          <summary>Professor Info</summary>
+          <summary>${this.detailLabel}</summary>
           <div>
            <slot></slot>
           </div>
