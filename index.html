@@ -57,8 +57,10 @@
   
   //toggle Custom Event
 document.body.addEventListener('opened-changed', (e)=>{
+  if (e.target === document.querySelector('professor-card2')){
   console.log(e.detail.value);
   document.querySelector('.toggle').innerText = e.detail.value ? "Hide" : "Show";
+  }
 });
 
 //Change Font to funny one
@@ -91,7 +93,7 @@ document.querySelector('.toggle').addEventListener('click', (e) => {
 });
 // duplicate the 1st item
 document.querySelector('.duplicate').addEventListener('click', function(e) {
-  const itemToClone = document.querySelector('professor-card').cloneNode();
+  const itemToClone = document.querySelector('professor-card').cloneNode(true);
   document.querySelector('#app').appendChild(itemToClone);
 });
 
@@ -110,8 +112,8 @@ document.querySelector('.modifytitle').addEventListener('click', function(e) {
 document.querySelector('#deletelastcard').addEventListener('click', function(e) {
   let wantsTo = confirm("Are you sure?");
   if (wantsTo) {
-    if (document.querySelector('#app :last-child') !== document.querySelector('professor-card')) {
-      document.querySelector('#app :last-child').remove();      
+    if (document.querySelector('#app professor-card:last-child') !== document.querySelector('professor-card')) {
+      document.querySelector('#app professor-card:last-child').remove();      
     }
     else {
       alert("YOU CAN NOT DELETE GOD HIMSELF!!!!");
