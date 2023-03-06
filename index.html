@@ -57,7 +57,7 @@
   
   //toggle Custom Event
 document.body.addEventListener('opened-changed', (e)=>{
-  if (e.target === document.querySelector('professor-card2')){
+  if (e.target === document.querySelector('professor-card')){
   console.log(e.detail.value);
   document.querySelector('.toggle').innerText = e.detail.value ? "Hide" : "Show";
   }
